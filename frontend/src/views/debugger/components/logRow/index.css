@@ -1,0 +1,10 @@
+.log-row {
+    border-bottom: 1px solid #cccccc;
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+.event-description {
+    text-align: left;
+    white-space: nowrap;
+}

@@ -1,0 +1,26 @@
+
+.header {
+    background-color: #f3f6f8;
+    border-bottom: 1px solid rgba(67,90,111,.146);
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+.button-bar-btn {
+    border-radius: 0;
+}
+
+.button-bar-btn:first-child {
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+
+.button-bar-btn:last-child {
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+
+.button-bar-btn.active {
+    background-color: #ddeeff;
+    color: #3ca0fe;
+}

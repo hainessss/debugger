@@ -19,7 +19,6 @@ class Debugger extends Component {
         this.state = {
             filter: "",
             isPaused: false,
-            filteredEvents: [],
             events: []
         }
     }
@@ -31,12 +30,12 @@ class Debugger extends Component {
 
     componentWillMount() {
         const {socket, queueEvent, consumeEvent} = this.props;
-        const _this = this;
+
         
         socket.onmessage = (message) => {
-            const { isPaused } = _this.state;
+            const { isPaused } = this.state;
             const event = JSON.parse(get(message, 'data'));
-            const {filteredEvents} = _this.state;
+            const {events} = this.state;
             
             //add to redux
             if (isPaused) {
@@ -44,9 +43,9 @@ class Debugger extends Component {
             } else {
                 queueEvent(event);
                 this.setState({
-                    filteredEvents: [
+                    events: [
                         this.props.nextEvent,
-                        ...filteredEvents
+                        ...events
                     ]
                 });
                 consumeEvent(); //enqueue new message. dequeue next in line
@@ -55,7 +54,6 @@ class Debugger extends Component {
     }
 
     handleSearch = (e) => {
-        const {events}  = this.state;
         const value     = get(e, 'target.value');
    
         this.setState({
@@ -80,13 +78,13 @@ class Debugger extends Component {
     }
 
     render() {
-        const {filteredEvents, isPaused, filter} = this.state;
+        const {events, isPaused, filter} = this.state;
 
         return (
             <div>
                 <SearchBar onClick={this.handleClick} isPaused={isPaused} onChange={debounce(this.handleSearch, 200)} />
                 {
-                    textSearch(filteredEvents, filter).map((event) => {
+                    textSearch(events, filter).map((event) => {
                         return (
                             <LogRow key={event.messageId} event={event}></LogRow>
                         );
@@ -98,7 +96,6 @@ class Debugger extends Component {
 }
 
 const mapStateToProps = state => ({
-    events: state.events,
     eventQueueLength: getEventQueueLength(state),
     nextEvent: getNextEvent(state)
 })

@@ -1,6 +1,5 @@
 import isPlainObject from 'lodash/isPlainObject';
 import isFunction from 'lodash/isFunction';
-import get from 'lodash/get';
 
 //simple collection text search
 export default (collection, searchText) => {

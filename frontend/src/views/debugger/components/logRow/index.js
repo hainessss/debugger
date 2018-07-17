@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import Flexbox from 'flexbox-react';
 import { Text, CheckCircleIcon, Heading } from 'evergreen-ui'
-import get from 'lodash/get';
-import format from 'date-fns/format';
 import './index.css';
 
 class LogRow extends Component {
